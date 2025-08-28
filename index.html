@@ -8,8 +8,8 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Particles background -->
-  <canvas id="particles"></canvas>
+  <!-- Stars + Constellations background -->
+  <canvas id="stars-canvas"></canvas>
 
   <!-- Header Banner -->
   <header class="banner">
@@ -44,7 +44,7 @@
       <div class="card">
         <h3>Student</h3>
         <p>Yuvro — 2025</p>
-        <p>Building Start-UP From Scratch (Yuvro)</p>uilding .</p>
+        <p>Building Start-UP From Scratch (Yuvro)</p>
       </div>
 
       <div class="card">
@@ -86,72 +86,9 @@
     <p>© 2025 Yash Dixit — Made with ♥</p>
   </footer>
 
-  <!-- Scripts: particles + reveal -->
+  <!-- Scripts -->
+  <script src="star.js"></script>
   <script>
-    // ====== Particles (simple & lightweight) ======
-    (function() {
-      const canvas = document.getElementById('particles');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let w = canvas.width = window.innerWidth;
-      let h = canvas.height = window.innerHeight;
-
-      const particles = [];
-      const COUNT = Math.max(40, Math.floor(w / 30));
-
-      function rand(min, max) { return Math.random() * (max - min) + min; }
-
-      function makeParticles() {
-        particles.length = 0;
-        for (let i = 0; i < COUNT; i++) {
-          particles.push({
-            x: rand(0, w),
-            y: rand(0, h),
-            r: rand(0.6, 2.4),
-            vx: rand(-0.2, 0.2),
-            vy: rand(-0.2, 0.2),
-            alpha: rand(0.08, 0.7)
-          });
-        }
-      }
-
-      function resize() {
-        w = canvas.width = window.innerWidth;
-        h = canvas.height = window.innerHeight;
-        makeParticles();
-      }
-      window.addEventListener('resize', resize);
-
-      function draw() {
-        ctx.clearRect(0,0,w,h);
-        // subtle glow background (optional, keeps cinematic)
-        // ctx.fillStyle = 'rgba(10,12,20,0.06)';
-        // ctx.fillRect(0,0,w,h);
-
-        for (let p of particles) {
-          p.x += p.vx;
-          p.y += p.vy;
-          if (p.x < -10) p.x = w + 10;
-          if (p.x > w + 10) p.x = -10;
-          if (p.y < -10) p.y = h + 10;
-          if (p.y > h + 10) p.y = -10;
-
-          const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 6);
-          g.addColorStop(0, 'rgba(255,255,255,' + (p.alpha*0.6) + ')');
-          g.addColorStop(0.6, 'rgba(0,198,255,' + (p.alpha*0.08) + ')');
-          g.addColorStop(1, 'rgba(0,0,0,0)');
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r * 6, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        requestAnimationFrame(draw);
-      }
-
-      makeParticles();
-      draw();
-    })();
-
     // ====== Scroll reveal for .reveal elements ======
     (function() {
       const reveals = document.querySelectorAll('.reveal');
@@ -165,15 +102,12 @@
       function onScroll() {
         for (const el of reveals) {
           if (isVisible(el)) el.classList.add('active');
-          // don't remove class to keep them visible after reveal
         }
       }
       window.addEventListener('scroll', onScroll);
       window.addEventListener('load', onScroll);
-      // initial check
       onScroll();
     })();
   </script>
 </body>
 </html>
-
